@@ -26,4 +26,4 @@ class CourseDetailSerializer(ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ('name', 'description', 'preview', 'count_lessons', 'lessons_info')
+        fields = ('name', 'description', 'preview', 'owner', 'lessons_count', 'lessons_info')

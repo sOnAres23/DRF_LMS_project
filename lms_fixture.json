@@ -1,0 +1,36 @@
+[
+{
+    "model": "lms.course",
+    "pk": 1,
+    "fields": {
+        "name": "Курс по гайдам игры в CS2 \"Jame time!\"",
+        "preview": "lms/photos/Джейм_fastcup.jpg",
+        "description": "Получите полный Jame time в CS2 и станьте профи!",
+        "owner": null
+    }
+},
+{
+    "model": "lms.lesson",
+    "pk": 1,
+    "fields": {
+        "name": "Отработка стрельбы и АИМа",
+        "description": "Научитесь стрелять как ПРО из самых лучших ганов в CS2!",
+        "preview": "",
+        "video_link": "",
+        "course": 1,
+        "owner": null
+    }
+},
+{
+    "model": "lms.lesson",
+    "pk": 2,
+    "fields": {
+        "name": "Отработка раскидки гранат",
+        "description": "Изучите самые стандартные раскидки гранат на разных картах",
+        "preview": "",
+        "video_link": "",
+        "course": 1,
+        "owner": null
+    }
+}
+]
