@@ -17,6 +17,24 @@ class Course(models.Model):
         verbose_name_plural = "Курсы"
 
 
+class CourseSubscription(models.Model):
+    """Модель создания подписки на Курс"""
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name="Пользователь подписки")
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name="Курс подписки")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата подписки")
+
+    class Meta:
+        verbose_name = "Подписка на курс"
+        verbose_name_plural = "Подписки на курс"
+        unique_together = (
+            "user",
+            "course",
+        )  # Уникальность подписки
+
+    def __str__(self):
+        return f"{self.user.email} подписан на {self.course.name}"
+
+
 class Lesson(models.Model):
     """Модель создания урока урока курса"""
     name = models.CharField(max_length=255, unique=True, verbose_name="Название урока")
