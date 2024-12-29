@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    "drf_yasg",
+    "corsheaders",
     "rest_framework",
     "rest_framework_simplejwt",
     "django_filters",
@@ -164,3 +166,5 @@ if CACHE_ENABLE:
     }
 
 AUTH_USER_MODEL = 'users.User'
+
+STRIPE_API_KEY = os.getenv("STRIPE_API_KEY")

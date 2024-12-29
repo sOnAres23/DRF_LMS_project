@@ -47,6 +47,13 @@ class Payments(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Сумма платежа")
     payment_method = models.CharField(max_length=30, choices=STATUS_CHOICES, default=TRANSFER,
                                       verbose_name="Метод оплаты")
+    session_id = models.CharField(max_length=255, verbose_name="ID сессии",
+                                  help_text="Укажите ID сессии для перевода на счет", blank=True, null=True,)
+    link = models.URLField(max_length=400, verbose_name="Ссылка на оплату",
+                           help_text="Укажите ссылку на оплату", blank=True, null=True,)
+
+    def __str__(self):
+        return f"Платеж {self.amount} от {self.user}"
 
     class Meta:
         verbose_name = "Платеж"
