@@ -18,9 +18,9 @@ class LessonSerializer(ModelSerializer):
 
 
 class CourseDetailSerializer(ModelSerializer):
-    lessons_count = SerializerMethodField()
-    lessons_info = LessonSerializer(many=True, read_only=True)
-    is_subscribed = SerializerMethodField()
+    lessons_count = SerializerMethodField(label="Количество уроков")
+    lessons_info = LessonSerializer(many=True, read_only=True, label="Информация по урокам")
+    is_subscribed = SerializerMethodField(label="Наличие подписки")
 
     def get_lessons_count(self, obj):
         # метод для подсчета количества уроков курса
@@ -35,7 +35,7 @@ class CourseDetailSerializer(ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ('name', 'description', 'preview', 'owner', 'lessons_count', 'lessons_info')
+        fields = ('name', 'description', 'preview', 'owner', 'lessons_count', 'lessons_info', 'is_subscribed')
 
 
 class CourseSubscriptionSerializer(ModelSerializer):
