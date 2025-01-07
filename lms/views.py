@@ -9,6 +9,7 @@ from lms.models import Course, Lesson, CourseSubscription
 from lms.paginators import MyCustomPagination
 from lms.serializers import CourseSerializer, LessonSerializer, CourseDetailSerializer, CourseSubscriptionSerializer
 from users.permissions import IsAdmin, IsOwner, IsModer
+from lms.tasks import send_course_update_email
 
 
 @method_decorator(
@@ -33,6 +34,22 @@ class CourseViewSet(ModelViewSet):
         elif self.action == 'destroy':
             self.permission_classes = (IsModer, IsOwner | IsAdmin)
         return super().get_permissions()
+
+    def perform_create(self, serializer):
+        course = serializer.save()
+        if course:
+            send_course_update_email.delay(course.id)
+
+    def perform_update(self, serializer):
+        course = serializer.save()
+        if course:
+            send_course_update_email.delay(course.id)
+
+    def perform_destroy(self, serializer):
+        course = serializer.save()
+        if course:
+            send_course_update_email.delay(course.id)
+        course.delete()
 
 
 class SubscriptionCourseAPIView(ListAPIView):

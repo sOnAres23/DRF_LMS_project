@@ -8,6 +8,7 @@ class Course(models.Model):
     description = models.TextField(max_length=800, blank=True, null=True, verbose_name="Описание курса",
                                    help_text="Введите своё описание курса")
     owner = models.ForeignKey('users.User', on_delete=models.CASCADE, blank=True, null=True, verbose_name="Владелец")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата последнего обновления")
 
     def __str__(self):
         return self.name
