@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Устанавливаем Poetry
-RUN pip install --no-cache-dir poetry
+RUN pip install poetry
 
 # Копируем файлы с зависимостями
 COPY pyproject.toml poetry.lock ./
@@ -25,4 +25,4 @@ RUN mkdir -p /lms_drf/media
 EXPOSE 8000
 
 # Определяем команду для запуска приложения
-CMD ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["poetry", "run", "gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000"]

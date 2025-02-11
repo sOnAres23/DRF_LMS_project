@@ -19,7 +19,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: sh -c "python manage.py collectstatic --noinput && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+    command: sh -c "poetry run python manage.py collectstatic --noinput && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - .:/lms_drf
     ports:
@@ -27,6 +27,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    environment:
+      - POSTGRES_HOST=db
     env_file:
       - .env
     networks:
