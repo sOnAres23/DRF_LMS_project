@@ -16,6 +16,8 @@ RUN pip install poetry
 COPY pyproject.toml poetry.lock ./
 
 # Устанавливаем зависимости с помощью Poetry
+RUN poetry config virtualenvs.create false
+
 RUN poetry install --no-root
 
 # Создаем директорию для медиафайлов
