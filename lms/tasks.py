@@ -30,7 +30,7 @@ def send_course_update_email(course_id):
                 fail_silently=False,
             )
     else:
-        print(f"Уведомление не отправлено, курс был обновлен менее 8 часов назад")
+        print("Уведомление не отправлено, курс был обновлен менее 8 часов назад")
 
 
 @shared_task
@@ -39,4 +39,4 @@ def block_inactive_users():
     month_ago = timezone.now() - timedelta(days=30)
     inactive_users = User.objects.filter(last_login__lt=month_ago, is_active=True)
     inactive_users.update(is_active=False)
-    print(f"Статуc пользователя изменен")
+    print("Статуc пользователя изменен")
