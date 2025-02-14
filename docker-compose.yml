@@ -27,7 +27,7 @@ services:
       db:
         condition: service_healthy
     env_file:
-      - .env
+      - /home/admin23/DRF_LMS_project/.env
 
   nginx:
     build:
@@ -43,7 +43,7 @@ services:
   redis:
     image: redis:latest
     env_file:
-      - .env
+      - /home/admin23/DRF_LMS_project/.env
 
   celery:
     build: .
@@ -54,7 +54,7 @@ services:
       - db
       - redis
     env_file:
-      - .env
+      - /home/admin23/DRF_LMS_project/.env
 
   celery-beat:
     build: .
@@ -65,7 +65,7 @@ services:
       - db
       - redis
     env_file:
-      - .env
+      - /home/admin23/DRF_LMS_project/.env
 
 volumes:
   postgres_data:

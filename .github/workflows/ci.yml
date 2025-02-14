@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v3
+      - name: Set working directory
+        run: cd /home/admin23/DRF_LMS_project
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
