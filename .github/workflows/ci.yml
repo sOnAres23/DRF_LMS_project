@@ -73,7 +73,7 @@ jobs:
 
       - name: Build and Push Docker images with Docker Compose
         run: |
-          cp DRF_LMS_project/.env .env
+          cp Project_DRF_LMS/.env .env
           sudo docker-compose build
           sudo docker-compose push
 
