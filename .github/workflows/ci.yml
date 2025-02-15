@@ -83,7 +83,7 @@ jobs:
       - name: Copy .env file
         run: |
           echo "Copying .env file..."
-          cp D:\PyCharm\Projects\DRF_LMS_project\.env .env
+          cp ../DRF_LMS_project/.env .env
 
       - name: Verify .env file
         run: |
