@@ -75,15 +75,15 @@ jobs:
           echo "Contents of the current directory:"
           ls -la  # Показывает содержимое текущей директории
 
-      - name: Check DRF_LMS_project directory
-        run: |
-          echo "Checking contents of DRF_LMS_project directory:"
-          ls -la DRF_LMS_project  # Показывает содержимое директории DRF_LMS_project
+#      - name: Check DRF_LMS_project directory
+#        run: |
+#          echo "Checking contents of DRF_LMS_project directory:"
+#          ls -la DRF_LMS_project  # Показывает содержимое директории DRF_LMS_project
 
       - name: Copy .env file
         run: |
           echo "Copying .env file..."
-          cp DRF_LMS_project/.env .env
+          cp D:\PyCharm\Projects\DRF_LMS_project\.env .env
 
       - name: Verify .env file
         run: |
