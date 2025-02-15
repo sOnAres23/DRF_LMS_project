@@ -68,12 +68,12 @@ jobs:
           sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
       
-      - name: Check current directory
-        run: |
-          echo "Current directory:"
-          pwd  # Показывает текущую директорию
-          echo "Contents of the current directory:"
-          ls -la  # Показывает содержимое текущей директории
+#      - name: Check current directory
+#        run: |
+#          echo "Current directory:"
+#          pwd  # Показывает текущую директорию
+#          echo "Contents of the current directory:"
+#          ls -la  # Показывает содержимое текущей директории
 
 #      - name: Check DRF_LMS_project directory
 #        run: |
@@ -85,18 +85,16 @@ jobs:
 #          echo "Copying .env file..."
 #          cp DRF_LMS_project/.env .env
 
-      - name: Verify .env file
-        run: |
-          echo "Verifying .env file existence:"
-          ls -la .env  # Проверяет наличие файла .env в корне
+#      - name: Verify .env file
+#        run: |
+#          echo "Verifying .env file existence:"
+#          ls -la .env  # Проверяет наличие файла .env в корне
 
       - name: Log in to Docker Hub
         run: echo ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
 
       - name: Build and Push Docker images with Docker Compose
         run: |
-          echo "Building Docker containers..."
-          cd DRF_LMS_project
           docker-compose build
           docker-compose push
 
