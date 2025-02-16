@@ -20,8 +20,9 @@ RUN poetry config virtualenvs.create false
 
 RUN poetry install --no-root
 
-# Создаем директорию для медиафайлов
+# Создаем директорию для медиафайлов и статики
 RUN mkdir -p /lms_drf/media
+RUN mkdir -p /lms_drf/staticfiles && chmod -R 755 /lms_drf/staticfiles
 
 # Открываем порт 8000 для взаимодействия с приложением
 EXPOSE 8000
