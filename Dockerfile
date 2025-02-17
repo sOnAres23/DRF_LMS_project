@@ -1,13 +1,12 @@
-FROM python:3.12-slim
+FROM python:3.12
 
-# Рабочая директория проекта в контейнере
+# Устанавливаем рабочую директорию в контейнере
 WORKDIR /lms_drf
 
-RUN apt-get update && apt-get install -y \
-    gcc \
-    libpq-dev \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+       apt-get install -y gcc libpq-dev && \
+       apt-get clean && \
+       rm -rf /var/lib/apt/lists/*
 
 # Устанавливаем Poetry
 RUN pip install poetry
@@ -16,9 +15,10 @@ RUN pip install poetry
 COPY pyproject.toml poetry.lock ./
 
 # Устанавливаем зависимости с помощью Poetry
-RUN poetry config virtualenvs.create false
-
 RUN poetry install --no-root
+
+# Копируем остальные файлы проекта в контейнер
+COPY . .
 
 # Создаем директорию для медиафайлов и статики
 RUN mkdir -p /lms_drf/media
@@ -28,4 +28,4 @@ RUN mkdir -p /lms_drf/staticfiles && chmod -R 755 /lms_drf/staticfiles
 EXPOSE 8000
 
 # Определяем команду для запуска приложения
-CMD ["poetry", "run", "gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
