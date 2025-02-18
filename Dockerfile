@@ -1,7 +1,7 @@
 FROM python:3.12
 
 # Устанавливаем рабочую директорию в контейнере
-WORKDIR /lms_drf
+WORKDIR /lms
 
 RUN apt-get update && \
        apt-get install -y gcc libpq-dev && \
@@ -21,8 +21,8 @@ RUN poetry install --no-root
 COPY . .
 
 # Создаем директорию для медиафайлов и статики
-RUN mkdir -p /lms_drf/media
-RUN mkdir -p /lms_drf/staticfiles && chmod -R 755 /lms_drf/staticfiles
+RUN mkdir -p /lms/media
+RUN mkdir -p /lms/staticfiles && chmod -R 755 /lms/staticfiles
 
 # Открываем порт 8000 для взаимодействия с приложением
 EXPOSE 8000
