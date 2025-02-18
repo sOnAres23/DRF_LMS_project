@@ -86,7 +86,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 REST_FRAMEWORK = {
 
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
-    "DEFAULT_AUTHENTICATION_CLASSES": ["rest_framework_simplejwt.authentication.JWTAuthentication"],
+    # "DEFAULT_AUTHENTICATION_CLASSES": ["rest_framework_simplejwt.authentication.JWTAuthentication"],
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated", ],
 }
 
@@ -142,11 +142,10 @@ USE_L18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
