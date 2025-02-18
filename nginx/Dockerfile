@@ -1,6 +1,6 @@
 FROM nginx:latest
 
-RUN mkdir -p /lms_drf/staticfiles
+RUN mkdir -p /lms/staticfiles
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
