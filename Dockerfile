@@ -1,16 +1,15 @@
-FROM python:3.12-slim
+FROM python:3.12
 
-# Рабочая директория проекта в контейнере
-WORKDIR /lms_drf
+# Устанавливаем рабочую директорию в контейнере
+WORKDIR /lms
 
-RUN apt-get update && apt-get install -y \
-    gcc \
-    libpq-dev \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+       apt-get install -y gcc libpq-dev && \
+       apt-get clean && \
+       rm -rf /var/lib/apt/lists/*
 
 # Устанавливаем Poetry
-RUN pip install --no-cache-dir poetry
+RUN pip install poetry
 
 # Копируем файлы с зависимостями
 COPY pyproject.toml poetry.lock ./
@@ -18,8 +17,12 @@ COPY pyproject.toml poetry.lock ./
 # Устанавливаем зависимости с помощью Poetry
 RUN poetry install --no-root
 
-# Создаем директорию для медиафайлов
-RUN mkdir -p /lms_drf/media
+# Копируем остальные файлы проекта в контейнер
+COPY . .
+
+# Создаем директорию для медиафайлов и статики
+RUN mkdir -p /lms/media
+RUN mkdir -p /lms/staticfiles && chmod -R 755 /lms/staticfiles
 
 # Открываем порт 8000 для взаимодействия с приложением
 EXPOSE 8000
